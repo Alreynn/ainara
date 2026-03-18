@@ -1,7 +1,7 @@
 export const SkeletonHome = () => {
     return (
         <div className="flex flex-col bg-slate-700 w-[31.5lvw] rounded-lg p-3">
-            <div className="object-cover w-full h-40 bg-zinc-400 rounded animate-pulse" />
+            <div className="object-cover w-full aspect-[3/4] bg-zinc-400 rounded animate-pulse" />
             <div className="flex flex-col space-y-1.5 mt-1.5">
                 <div className="h-3.5 bg-zinc-400 rounded animate-pulse"></div>
                 <div className="h-3 bg-zinc-400 rounded animate-pulse"></div>
@@ -12,9 +12,10 @@ export const SkeletonHome = () => {
 }
 
 export const SkeletonTitleOnly = () => {
+    // This needs width fixing
     return (
         <div className="flex flex-col bg-slate-700 w-[31.5lvw] rounded-lg p-3">
-            <div className="object-cover w-full h-40 bg-zinc-400 rounded animate-pulse" />
+            <div className="object-cover w-full aspect-[3/4] bg-zinc-400 rounded animate-pulse" />
             <div className="flex flex-col space-y-1.5 mt-1.5">
                 <div className="h-3.5 bg-zinc-400 rounded animate-pulse"></div>
             </div>
