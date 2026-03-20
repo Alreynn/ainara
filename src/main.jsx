@@ -7,6 +7,7 @@ import Footer from './components/Footer.jsx'
 import ErrorBoundary from './ErrorBoundary.jsx'
 import App from './App.jsx'
 import Release from './Release.jsx'
+import AllAnime from './AllAnime.jsx'
 import Search from './Search.jsx'
 import Details from './Details.jsx'
 import Watch from './Watch.jsx'
@@ -21,6 +22,7 @@ createRoot(document.getElementById('root')).render(
               <Routes>
                   <Route path="/" element={<App />} />
                   <Route path="/release" element={<Release />} />
+                  <Route path="/anime" element={<AllAnime />} />
                   <Route path="/search" element={<Search />} />
                   <Route path="/anime/:slug" element={<Details />} />
                   <Route path="/anime/watch/:slug" element={<Watch />} />

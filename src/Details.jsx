@@ -24,8 +24,8 @@ const Details = () => {
             const response = await getDetails.json();
             setDetails(response.data);
             
-            const check = removeEmptyArray(response.data.synopsis.paragraphs);
-            setSynopsis(check);
+            // const check = removeEmptyArray(response.data.synopsis.paragraphs);
+            // setSynopsis(check);
             setLoad(true);
         } catch(e) {
             alert(e);
@@ -45,7 +45,7 @@ const Details = () => {
     
     return (
         <>
-            <img src={details.poster || poster} className="w-screen min-h-[80lvh] object-cover bg-gray-500" />
+            <img src={details.poster || poster || ""} className="w-screen min-h-[80lvh] object-cover bg-gray-500" />
             <main className="absolute top-32 w-screen bg-gradient-to-b from-gray-950/0 to-slate-950 to-40% p-3 pt-32 min-h-screen text-white">
                 <div className="flex flex-row justify-between items-center basis-1/4">
                     {!isLoaded && title === undefined && (
@@ -81,7 +81,7 @@ const Details = () => {
                         </div>
                         
                         <div className="flex flex-col gap-y-5 mt-5">
-                            <article>
+                            {/* <article>
                                 {synopsis !== [] && (
                                     <>
                                         <h2 className="text-xl font-bold">Sinopsis</h2>
@@ -92,7 +92,7 @@ const Details = () => {
                                         </button>
                                     </>
                                 )}
-                            </article>
+                            </article> */}
                             
                             <h2 className="text-xl font-bold">Daftar Episode</h2>
                             <div className="flex flex-col gap-3 h-96 overflow-y-scroll">
