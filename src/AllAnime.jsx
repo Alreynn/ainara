@@ -41,8 +41,8 @@ const AllAnime = () => {
         return (
             <div className="flex flex-col gap-y-1.5">
                 <div className="bg-gray-400 rounded h-6 w-4 animate-pulse"></div>
-                <div className="flex flex-col bg-slate-700 grow-0 shrink-0 w-full rounded-lg p-3 py-4">
-                    <div className="bg-gray-400 rounded h-5 w-full animate-pulse"></div>
+                <div className="flex flex-col bg-slate-700 grow-0 shrink-0 w-full rounded-xl p-3 py-4">
+                    <div className="bg-gray-400 rounded-lg h-5 w-full animate-pulse"></div>
                 </div>
             </div>
         )
@@ -62,7 +62,7 @@ const AllAnime = () => {
                             <div className="flex flex-col gap-y-3">
                                 {item.animeList.map((lists) => (
                                     <>
-                                        <Link to={`/anime/${lists.animeId}`} state={{ title: getTitle(lists.title) }} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-full rounded-lg p-3">
+                                        <Link to={`/anime/${lists.animeId}`} state={{ title: getTitle(lists.title) }} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-full rounded-xl p-3">
                                             <p className="truncate text-md">{getTitle(lists.title)}</p>
                                         </Link>
                                     </>

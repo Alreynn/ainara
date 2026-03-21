@@ -9,6 +9,7 @@ import App from './App.jsx'
 import Release from './Release.jsx'
 import AllAnime from './AllAnime.jsx'
 import Search from './Search.jsx'
+import Genre from './Genre.jsx'
 import Details from './Details.jsx'
 import Watch from './Watch.jsx'
 import About from './About.jsx'
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
                   <Route path="/release" element={<Release />} />
                   <Route path="/anime" element={<AllAnime />} />
                   <Route path="/search" element={<Search />} />
+                  <Route path="/genre/:slug" element={<Genre />} />
                   <Route path="/anime/:slug" element={<Details />} />
                   <Route path="/anime/watch/:slug" element={<Watch />} />
                   <Route path="/about" element={<About />} />

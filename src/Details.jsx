@@ -24,8 +24,8 @@ const Details = () => {
             const response = await getDetails.json();
             setDetails(response.data);
             
-            // const check = removeEmptyArray(response.data.synopsis.paragraphs);
-            // setSynopsis(check);
+            const check = removeEmptyArray(response.data.synopsis.paragraphs);
+            setSynopsis(check);
             setLoad(true);
         } catch(e) {
             alert(e);
@@ -43,23 +43,38 @@ const Details = () => {
         return arr;
     }
     
+    const getScore = (score) => {
+        if (!score) return "";
+        
+        return score
+        .replace(/Fall 2025/gi, "")
+        .trim();
+    }
+    
     return (
         <>
-            <img src={details.poster || poster || ""} className="w-screen min-h-[80lvh] object-cover bg-gray-500" />
-            <main className="absolute top-32 w-screen bg-gradient-to-b from-gray-950/0 to-slate-950 to-40% p-3 pt-32 min-h-screen text-white">
+            <img src={details?.poster || poster || ""} className="w-screen min-h-[80lvh] object-cover bg-gray-500" />
+            <main className="absolute top-36 w-screen bg-gradient-to-b from-gray-950/0 to-slate-950 to-40% p-3 pt-32 min-h-screen text-white">
                 <div className="flex flex-row justify-between items-center basis-1/4">
                     {!isLoaded && title === undefined && (
                         <div className="bg-gray-500 h-8 w-[22rem] rounded-md my-1 animate-pulse"></div>
                     )}
-                    <h1 className="text-4xl font-bold w-80 max-h-40 overflow-y-auto md:w-full">{details.title || title}</h1>
-                    <span className="w-[62px] text-center border border-white rounded-lg p-1 px-2">{isLoaded && details.score !== "" ? `${details.score}` : "?"}</span>
+                    <h1 className="text-3xl font-bold w-80 max-h-40 overflow-y-auto md:w-full">{details?.title || title}</h1>
+                    <span className="w-[62px] text-center border border-white rounded-lg p-1 px-2">{isLoaded && details?.score !== "" ? getScore(details?.score) || "?" : "?"}</span>
                 </div>
+                
                 {!isLoaded ? (
                     <>
                         <div className="bg-gray-500 h-4 w-full rounded-md mt-1 animate-pulse"></div>
                         <div className="flex mt-2 gap-x-5">
                             {repeatment(
-                                <div className="bg-gray-500 border-white rounded-md py-0.5 px-1.5 w-16 h-7 animate-pulse"></div>
+                                <div className="bg-gray-500 border-white rounded-md py-0.5 px-1.5 w-16 h-6 animate-pulse"></div>
+                            , 4)}
+                        </div>
+                        <hr className="mt-2" />
+                        <div className="flex mt-2 gap-x-5">
+                            {repeatment(
+                                <div className="bg-gray-500 border-white rounded-md py-0.5 px-1.5 w-12 h-6 animate-pulse"></div>
                             , 4)}
                         </div>
                         
@@ -72,31 +87,44 @@ const Details = () => {
                     </>
                 ) : (
                     <>
-                        <p>{details.japanese}</p>
-                        <div className="flex flex-wrap mt-1 gap-y-2 gap-x-5">
-                            <Tags>{details.status}</Tags>
-                            <Tags>{details.type}</Tags>
-                            <Tags>{details.aired}</Tags>
-                            <Tags>{details.studios}</Tags>
+                        <p>{details?.japanese}</p>
+                        <div className="flex flex-wrap mt-1 gap-y-2 gap-x-4">
+                            <Tags>{details?.status}</Tags>
+                            <Tags>{details?.type}</Tags>
+                            <Tags>{details?.aired}</Tags>
+                            <Tags>{details?.studios}</Tags>
+                        </div>
+                        <hr className="mt-2" />
+                        <div className="flex flex-wrap mt-2 gap-y-2 gap-x-4">
+                            {details?.genreList.map((item) => (
+                                <Tags>
+                                    <Link to={`/genre/${item.genreId}`} state={{ genre: item.title }}>
+                                        {item.title}
+                                    </Link>
+                                </Tags>
+                            ))}
                         </div>
                         
                         <div className="flex flex-col gap-y-5 mt-5">
-                            {/* <article>
-                                {synopsis !== [] && (
+                            <article>
+                                {synopsis?.length > 0 && (
                                     <>
                                         <h2 className="text-xl font-bold">Sinopsis</h2>
-                                        <button onClick={() => setSynopsisOpen(!isSynopsisOpen)} className="overflow-y-auto max-h-32">
-                                            {synopsis.map((p) => (
+                                        <button onClick={() => setSynopsisOpen(!isSynopsisOpen)} className={`
+                                        overflow-hidden
+                                        ${isSynopsisOpen ? "h-full" : "max-h-32"}
+                                        `}>
+                                            {synopsis?.map((p) => (
                                                 <p className="indent-8 text-justify">{p}</p>
                                             ))}
                                         </button>
                                     </>
                                 )}
-                            </article> */}
+                            </article>
                             
                             <h2 className="text-xl font-bold">Daftar Episode</h2>
                             <div className="flex flex-col gap-3 h-96 overflow-y-scroll">
-                                {details.episodeList.map((item) => (
+                                {details?.episodeList.map((item) => (
                                     <div className="border p-1.5 px-2.5 rounded-xl -space-y-0.5">
                                         <Link to={`/anime/watch/${item.episodeId}`} state={{ title }} key={item.episodeId}>
                                             <p className="text-lg">Episode {item.eps}</p>

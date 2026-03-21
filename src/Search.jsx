@@ -7,6 +7,7 @@ import repeatment from './functions/repeatment.jsx'
 const Search = () => {
     const [searchedAnime, setSearchedAnime] = useState([]);
     const [isLoaded, setLoad] = useState(false);
+    const [isNotFound, setNotFound] = useState(false);
     const [ searchParams ] = useSearchParams();
     const query = searchParams.get("q");
     
@@ -17,13 +18,15 @@ const Search = () => {
     const fetchSearching = async () => {
         window.scrollTo(0, 0);
         setLoad(false);
+        setNotFound(false);
         try {
             const searchFor = await fetch(`https://www.sankavollerei.com/anime/search/${query}`);
             const response = await searchFor.json();
             setSearchedAnime(response.data.animeList);
             setLoad(true);
         } catch(e) {
-            alert(e);
+            setNotFound(true);
+            setLoad(true);
         }
     }
     
@@ -43,7 +46,7 @@ const Search = () => {
             <main className="background-color py-5 px-2 min-h-screen text-white">
                 <h2 className="text-2xl font-bold mt-5 mb-3">Kamu mencari "{searchParams.get("q")}"</h2>
                 <div className="flex flex-wrap items-center gap-y-5 gap-x-0.5 justify-around">
-                    {!isLoaded && (
+                    {!isLoaded && !isNotFound && (
                         repeatment(<SkeletonTitleOnly />, 9)
                     )}
                     
@@ -61,6 +64,13 @@ const Search = () => {
                             </div>
                         </Link>
                     ))}
+                    
+                    {isNotFound && (
+                        <div className="flex flex-col justify-center items-center min-h-[70lvh]">
+                            <p className="text-center text-xl font-semibold">Anime tidak ditemukan!</p>
+                            <p>Cari anime lain.</p>
+                        </div>
+                    )}
                 </div>
             </main>
             
