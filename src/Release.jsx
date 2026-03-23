@@ -1,6 +1,7 @@
 import { Link } from 'react-router'
 import { useEffect, useState } from 'react'
 import { SkeletonTitleOnly } from './components/skeleton.jsx'
+import { AnimeBox } from './components/AnimeBox.jsx'
 import Navigation from './components/Navigation.jsx'
 
 const releases = () => {
@@ -42,7 +43,7 @@ const releases = () => {
             <div className="flex flex-col gap-y-1">
                 <div className="h-5 w-14 bg-zinc-400 mt-3 rounded animate-pulse"></div>
                 <div className="flex flex-row gap-x-5 mt-3 overflow-scroll">
-                    {repeatment(<SkeletonTitleOnly />, 3)}
+                    {repeatment(<SkeletonTitleOnly />, 4)}
                 </div> 
             </div>
         )
@@ -64,12 +65,7 @@ const releases = () => {
                             <h2 className="font-bold text-xl">{day}</h2>
                             <div className="flex flex-row gap-x-5 overflow-auto">
                                 {list.map((item) => (
-                                    <Link to={`/anime/${item.slug}`} state={{ title: item.title, poster: item.poster }} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-[31.5lvw] rounded-lg p-3">
-                                        <img src={item.poster} alt={item.title} className="object-cover aspect-[3/4] rounded" />
-                                        <div className="flex flex-col -space-y-1">
-                                            <p className="truncate text-lg font-semibold">{item.title}</p>
-                                        </div>
-                                    </Link>
+                                    <AnimeBox linkTo={item.slug} title={item.title} poster={item.poster} />
                                 ))}
                             </div>
                         </div>

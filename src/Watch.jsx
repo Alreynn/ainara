@@ -60,14 +60,14 @@ const Watch = () => {
                 ) : (
                     <>
                         {fetchedData?.hasPrevEpisode ? (
-                            <Link to={`/anime/watch/${fetchedData?.prevEpisode?.episodeId}`} state={{ title }} className="flex items-center gap-1 border border-white py-1 px-2 rounded-lg">
+                            <Link to={`/anime/watch/${fetchedData?.prevEpisode?.episodeId}`} state={{ title }} className="flex items-center gap-1.5 border border-white py-1 px-2 rounded-lg">
                                 <StepBack className="size-3" /> Ep Sebelumnya
                             </Link>
                         ) : (
                             <button></button>
                         )}
                         {fetchedData?.hasNextEpisode && (
-                            <Link to={`/anime/watch/${fetchedData?.nextEpisode?.episodeId}`} state={{ title }} className="flex items-center gap-1 border border-white py-1 px-2 rounded-lg">
+                            <Link to={`/anime/watch/${fetchedData?.nextEpisode?.episodeId}`} state={{ title }} className="flex items-center gap-1.5 border border-white py-1 px-2 rounded-lg">
                                 Ep Selanjutnya <StepForward className="size-3" />
                             </Link>
                         )}

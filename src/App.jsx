@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { SkeletonHome } from './components/skeleton.jsx'
 import Navigation from './components/Navigation.jsx'
 import { ArrowRight, Home, Search } from 'lucide-react'
+import { AnimeBox } from './components/AnimeBox.jsx'
 import Tags from './components/Tags.jsx'
 import repeatment from './functions/repeatment.jsx'
 
@@ -61,14 +62,6 @@ const App = () => {
             setError(true);
         }
     }
-    
-    const getScore = (score) => {
-        if (!score) return "";
-        
-        return score
-        .replace(/Fall 2025/gi, "")
-        .trim();
-    }
 
     return (
         <>
@@ -85,16 +78,7 @@ const App = () => {
                     )}
                             
                     {recent.map((item) => (
-                        <Link to={`/anime/${item.animeId}`} state={{ title: item.title, poster: item.poster }} key={item.title} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-[31.5lvw] rounded-lg p-3 md:w-[15lvw]">
-                            <div className="relative">
-                                <img src={item.poster} alt={item.title} className="object-cover aspect-[3/4] rounded" />
-                            </div>
-                            <div className="flex flex-col -space-y-1">
-                                <p className="truncate text-lg font-semibold">{item.title}</p>
-                                <p className="truncate text-sm">Ep {item.episodes}</p>
-                                <p className="truncate text-sm">{item.latestReleaseDate}</p>
-                            </div>
-                        </Link>
+                        <AnimeBox linkTo={item.animeId} title={item.title} poster={item.poster} episode={item.episodes} lastRelease={item.latestReleaseDate} />
                     ))}
                     
                     {isError && (
@@ -133,17 +117,7 @@ const App = () => {
                     )}
                             
                     {completed.map((item) => (
-                        <Link to={`/anime/${item.animeId}`} state={{ title: item.title, poster: item.poster }} key={item.title} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-[31.5lvw] rounded-lg p-3 md:w-[15lvw]">
-                            <div className="relative">
-                                <img src={item.poster} alt={item.title} className="object-cover aspect-[3/4] rounded" />
-                                <p className="absolute top-0 bg-blue-700 rounded-br-xl p-0.5 px-2 text-sm">{item.score !== "" ? getScore(item.score) : "?"}</p>
-                            </div>
-                            <div className="flex flex-col -space-y-1">
-                                <p className="truncate text-lg font-semibold">{item.title}</p>
-                                <p className="truncate text-sm">Ep {item.episodes}</p>
-                                <p className="truncate text-sm">{item.lastReleaseDate}</p>
-                            </div>
-                        </Link>
+                        <AnimeBox linkTo={item.animeId} title={item.title} poster={item.poster} score={item.score} episode={item.episodes} lastRelease={item.lastReleaseDate} />
                     ))}
                 </div>
             </main>

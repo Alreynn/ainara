@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /search
+Sitemap: https://ainara-psi.vercel.app/sitemap.xml

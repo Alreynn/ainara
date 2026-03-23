@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useSearchParams, Link } from 'react-router'
 import { SkeletonTitleOnly } from './components/skeleton.jsx'
+import { AnimeBox } from './components/AnimeBox.jsx'
 import Navigation from './components/Navigation.jsx'
 import repeatment from './functions/repeatment.jsx'
 
@@ -51,18 +52,7 @@ const Search = () => {
                     )}
                     
                     {searchedAnime.map((item) => (
-                        <Link to={`/anime/${item.animeId}`} state={{ title: getTitle(item.title), poster: item.poster }} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-[31.5lvw] rounded-lg p-3 md:w-[15lvw]">
-                            <div className="relative">
-                                <img src={item.poster} alt={item.title} className="object-cover aspect-[3/4] w-full rounded" />
-                                {item.score !== "" && (
-                                    <p className="absolute top-0 bg-blue-700 py-1 px-1.5 rounded rounded-tr-none rounded-bl-none">{item.score}</p>
-                                )}
-                            </div>
-                                
-                            <div className="flex flex-col -space-y-1">
-                                <p className="truncate text-lg font-semibold">{getTitle(item.title)}</p>
-                            </div>
-                        </Link>
+                        <AnimeBox linkTo={item.animeId} title={item.title} poster={item.poster} score={item.score} />
                     ))}
                     
                     {isNotFound && (
