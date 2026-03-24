@@ -10,7 +10,7 @@ const Footer = () => {
         <footer className="flex flex-col gap-y-5 bg-gradient-to-b from-indigo-500 to-blue-700 text-white p-3 pt-24 pb-5">
             <div className="-space-y-1">
                 <h2 className="text-4xl font-bold">Ainara</h2>
-                <p className="text-sm">Release 7 • {getYear}</p>
+                <p className="text-sm">Release 8 • {getYear}</p>
             </div>
             
             <table>

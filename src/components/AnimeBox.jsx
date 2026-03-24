@@ -21,7 +21,7 @@ export const AnimeBox = ({ linkTo, title, poster, score, episode, lastRelease })
     }
     
     return (
-        <Link to={`/anime/${linkTo}`} state={{ title: getTitle(title), poster: poster }} key={title} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-[31.5lvw] rounded-lg p-3 md:w-[15lvw]">
+        <Link to={`/anime/${linkTo}`} state={{ title: getTitle(title), poster: poster }} key={title} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-[31.5lvw] rounded-lg p-3 md:w-[15lvw] md:cursor-pointer">
             <div className="relative">
                 <img src={poster} alt={title} className="object-cover aspect-[3/4] w-full rounded" />
                 {score && (

@@ -23,6 +23,12 @@ export const SkeletonTitleOnly = () => {
     )
 }
 
+export const GenreSkeleton = ({ width }) => {
+    return (
+        <div style={{ width: `${width * 4}px` }} className={`bg-gray-400 border-white rounded-md py-0.5 px-2 h-6 animate-pulse`}></div>
+    )
+}
+
 export const EpisodeSkeleton = () => {
     return (
         <div className="border p-1.5 px-2.5 rounded-xl space-y-1.5">

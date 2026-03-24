@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { useParams, useLocation, Link } from 'react-router'
+import { Helmet } from 'react-helmet-async'
+import { useParams, Link } from 'react-router'
 import { SkeletonTitleOnly } from './components/skeleton.jsx'
 import Navigation from './components/Navigation.jsx'
 import repeatment from './functions/repeatment.jsx'
@@ -8,7 +9,6 @@ const Genre = () => {
     const [animes, setAnimes] = useState([]);
     const [isLoaded, setLoad] = useState(false);
     const { slug } = useParams();
-    const { genre } = useLocation().state || {};
     
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -40,8 +40,13 @@ const Genre = () => {
     
     return (
         <>
+            <Helmet>
+                <title>{slug ? `${getGenreTitle(slug)} - Ainara` : "Memuat... - Ainara"}</title>
+                <meta name="description" content={`Anime dengan genre ${getGenreTitle(slug)} di Ainara`} />
+            </Helmet>
+            
             <main className="background-color py-5 px-2 min-h-screen text-white">
-                <h2 className="text-2xl font-bold mt-5 mb-3">{getGenreTitle(slug) || genre}</h2>
+                <h2 className="text-2xl font-bold mt-5 mb-3">{getGenreTitle(slug)}</h2>
                 <div className="flex flex-wrap items-center gap-y-5 gap-x-0.5 justify-around">
                     {!isLoaded && (
                         repeatment(<SkeletonTitleOnly />, 12)

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router'
 import { SkeletonTitleOnly } from './components/skeleton.jsx'
 import Navigation from './components/Navigation.jsx'
@@ -50,6 +51,11 @@ const AllAnime = () => {
     
     return (
         <>
+            <Helmet>
+                <title>Semua Anime - Ainara</title>
+                <meta name="description" content="Cari tahu anime yang tersedia di Ainara" />
+            </Helmet>
+            
             <main className="background-color py-5 px-2 min-h-screen text-white">
                 <div className="flex flex-col gap-y-5">
                     <h1 className="text-2xl font-bold">Semua Anime</h1>
@@ -59,7 +65,7 @@ const AllAnime = () => {
                     {animes.map((item) => (
                         <div className="flex flex-col gap-y-1">
                             <h2 id={item.startWith} className="text-xl font-bold">{item.startWith}</h2>
-                            <div className="flex flex-col gap-y-3">
+                            <div className="flex flex-col gap-y-3 md:w-2/3">
                                 {item.animeList.map((lists) => (
                                     <>
                                         <Link to={`/anime/${lists.animeId}`} state={{ title: getTitle(lists.title) }} className="flex flex-col grow-0 shrink-0 border border-indigo-300 w-full rounded-xl p-3">

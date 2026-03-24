@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useSearchParams, Link } from 'react-router'
 import { SkeletonTitleOnly } from './components/skeleton.jsx'
 import { AnimeBox } from './components/AnimeBox.jsx'
@@ -18,6 +19,7 @@ const Search = () => {
     
     const fetchSearching = async () => {
         window.scrollTo(0, 0);
+        setSearchedAnime([]);
         setLoad(false);
         setNotFound(false);
         try {
@@ -44,6 +46,10 @@ const Search = () => {
     
     return (
         <>
+            <Helmet>
+                <title>{query ? `${query} - Ainara` : "Memuat... - Ainara"}</title>
+            </Helmet>
+            
             <main className="background-color py-5 px-2 min-h-screen text-white">
                 <h2 className="text-2xl font-bold mt-5 mb-3">Kamu mencari "{searchParams.get("q")}"</h2>
                 <div className="flex flex-wrap items-center gap-y-5 gap-x-0.5 justify-around">

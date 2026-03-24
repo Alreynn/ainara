@@ -1,5 +1,6 @@
-import { Link } from 'react-router'
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { Link } from 'react-router'
 import { SkeletonTitleOnly } from './components/skeleton.jsx'
 import { AnimeBox } from './components/AnimeBox.jsx'
 import Navigation from './components/Navigation.jsx'
@@ -40,10 +41,10 @@ const releases = () => {
     
     const SkeletonLoad = () => {
         return (
-            <div className="flex flex-col gap-y-1">
+            <div className="flex flex-col gap-y-3">
                 <div className="h-5 w-14 bg-zinc-400 mt-3 rounded animate-pulse"></div>
-                <div className="flex flex-row gap-x-5 mt-3 overflow-scroll">
-                    {repeatment(<SkeletonTitleOnly />, 4)}
+                <div className="flex flex-row gap-x-5 overflow-auto">
+                    {repeatment(<SkeletonTitleOnly />, 3)}
                 </div> 
             </div>
         )
@@ -51,6 +52,11 @@ const releases = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Jadwal Rilis - Ainara</title>
+                <meta name="description" content="Cari tahu Jadwal Rilis Anime di Ainara" />
+            </Helmet>
+            
             <main className="background-color py-5 px-2 text-white">
                 <div className="flex items-center justify-between px-1 mt-5">
                     <p className="font-bold text-2xl">Jadwal Rilis</p>

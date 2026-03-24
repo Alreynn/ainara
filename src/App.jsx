@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router'
-import { SkeletonHome } from './components/skeleton.jsx'
+import { SkeletonHome, GenreSkeleton } from './components/skeleton.jsx'
 import Navigation from './components/Navigation.jsx'
 import { ArrowRight, Home, Search } from 'lucide-react'
 import { AnimeBox } from './components/AnimeBox.jsx'
@@ -32,6 +33,7 @@ const App = () => {
             setLoad(true);
         } catch(e) {
             setError(true);
+            console.clear();
         }
     }
     
@@ -46,6 +48,7 @@ const App = () => {
             setLoad(true);
         } catch(e) {
             setError(true);
+            console.clear();
         }
     }
     
@@ -60,15 +63,20 @@ const App = () => {
             setLoad(true);
         } catch(e) {
             setError(true);
+            console.clear();
         }
     }
 
     return (
         <>
+            <Helmet>
+                <title>Home - Ainara</title>
+            </Helmet>
+            
             <main className="background-color py-5 px-2 text-white min-h-screen">
                 <div className="flex items-center justify-between px-1 mt-5 mb-1">
                     <h1 className="font-bold text-2xl">Anime Terbaru</h1>
-                    <Link to='/release' className="flex items-center gap-x-1">
+                    <Link to='/release' className="flex items-center gap-x-1 md:cursor-pointer">
                         Jadwal Rilis <ArrowRight className="size-4" />
                     </Link>
                 </div>
@@ -94,14 +102,14 @@ const App = () => {
                     {!isLoaded ? (
                         <>
                             {repeatment(
-                                <div className="bg-gray-400 border-white rounded-md py-0.5 px-1.5 w-16 h-7 animate-pulse"></div>
-                            , 20)}
+                                <GenreSkeleton width="14" />
+                            , 30)}
                         </>
                     ) : (
                         <>
                             {genres.map((item) => (
                                 <Tags>
-                                    <Link to={`/genre/${item.genreId}`} state={{ genre: item.title }}>
+                                    <Link to={`/genre/${item.genreId}`}>
                                         {item.title}
                                     </Link>
                                 </Tags>
