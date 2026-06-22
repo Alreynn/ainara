@@ -18,7 +18,7 @@ const Watch = () => {
         window.scrollTo(0, 0);
         setData(null);
         try {
-            const getStream = await fetch(`https://www.sankavollerei.com/anime/episode/${slug}`);
+            const getStream = await fetch(`https://www.sankavollerei.web.id/anime/episode/${slug}`);
             const response = await getStream.json();
             setData(response.data);
             
@@ -82,9 +82,11 @@ const Watch = () => {
                     )}
                 </div>
                     
-                <article className="flex flex-col p-2">
-                    <h1 className="text-xl font-bold">{title || getTitle(fetchedData?.title)}</h1>
-                    <p>Episode {getEpisodeNumber(slug)}</p>
+                <article className="flex flex-col justify-between p-2">
+                    <div>
+                        <h1 className="text-xl font-bold">{title || getTitle(fetchedData?.title)}</h1>
+                        <p>Episode {getEpisodeNumber(slug)}</p>
+                    </div>
                 </article>
             </main>
         </>

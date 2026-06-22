@@ -25,7 +25,7 @@ const App = () => {
     const fetchAnime = async () => {
         setError(false);
         try {
-            const recent = await fetch("https://www.sankavollerei.com/anime/home");
+            const recent = await fetch("https://www.sankavollerei.web.id/anime/home");
             const response = await recent.json();
             setRecent(response.data.ongoing.animeList);
             
@@ -40,7 +40,7 @@ const App = () => {
     const fetchGenres = async () => {
         setError(false);
         try {
-            const genres = await fetch("https://www.sankavollerei.com/anime/genre");
+            const genres = await fetch("https://www.sankavollerei.web.id/anime/genre");
             const response = await genres.json();
             setGenres(response.data.genreList);
             
@@ -55,7 +55,7 @@ const App = () => {
     const fetchCompleted = async () => {
         setError(false);
         try {
-            const completed = await fetch("https://www.sankavollerei.com/anime/complete-anime?page=1");
+            const completed = await fetch("https://www.sankavollerei.web.id/anime/complete-anime?page=1");
             const response = await completed.json();
             setCompleted(response.data.animeList);
             

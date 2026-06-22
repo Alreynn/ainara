@@ -17,7 +17,7 @@ const AllAnime = () => {
     const fetchAllAnime = async () => {
         window.scrollTo(0, 0);
         try {
-            const getAll = await fetch("https://www.sankavollerei.com/anime/unlimited");
+            const getAll = await fetch("https://www.sankavollerei.web.id/anime/unlimited");
             const response = await getAll.json();
             setAnimes(response.data.list);
             setLoad(true);

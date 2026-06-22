@@ -21,7 +21,7 @@ const Details = () => {
     const fetchDetails = async () => {
         window.scrollTo(0, 0);
         try {
-            const getDetails = await fetch(`https://www.sankavollerei.com/anime/anime/${slug}`);
+            const getDetails = await fetch(`https://www.sankavollerei.web.id/anime/anime/${slug}`);
             const response = await getDetails.json();
             setDetails(response.data);
             
@@ -177,7 +177,7 @@ const Details = () => {
                                         ${isSynopsisOpen ? "h-full" : "max-h-32"}
                                         `}>
                                             {synopsis?.map((p) => (
-                                                <p className="text-justify">{p}</p>
+                                                <p className="leading-snug text-justify">{p}</p>
                                             ))}
                                         </button>
                                     </>

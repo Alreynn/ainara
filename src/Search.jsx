@@ -23,7 +23,7 @@ const Search = () => {
         setLoad(false);
         setNotFound(false);
         try {
-            const searchFor = await fetch(`https://www.sankavollerei.com/anime/search/${query}`);
+            const searchFor = await fetch(`https://www.sankavollerei.web.id/anime/search/${query}`);
             const response = await searchFor.json();
             setSearchedAnime(response.data.animeList);
             setLoad(true);

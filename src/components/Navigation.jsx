@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import { useNavigate, Link } from 'react-router'
-import { Home, TvMinimal, Calendar, Search } from 'lucide-react'
+import { Home, Search, TvMinimal, Calendar, Settings } from 'lucide-react'
 
 const liquid = "rounded-xl p-1.5 size-9 transition-all duration-75 active:size-8 md:cursor-pointer md:hover:size-10 md:hover:bg-white/20 md:hover:text-neutral-300"
 
@@ -52,12 +52,15 @@ const Navigation = ({ isLoaded }) => {
                 <Link to="/" aria-label="Halaman Utama">
                     <Home className={liquid} />
                 </Link>
+                <Search onClick={() => setSearchOpen(!isSearchOpen)} className={liquid} aria-label="Cari" />
                 <Link to="/release" aria-label="Tanggal Rilis">
                     <Calendar className={liquid} />
                 </Link>
-                <Search onClick={() => setSearchOpen(!isSearchOpen)} className={liquid} aria-label="Cari" />
                 <Link to="/anime" aria-label="Semua Anime">
                     <TvMinimal className={liquid} />
+                </Link>
+                <Link to="/settings" aria-label="Semua Anime">
+                    <Settings className={liquid} />
                 </Link>
             </div>
         </nav>

@@ -17,7 +17,7 @@ const Genre = () => {
     
     const fetchAnimes = async () => {
         try {
-            const animes = await fetch(`https://www.sankavollerei.com/anime/genre/${slug}?page=1`);
+            const animes = await fetch(`https://www.sankavollerei.web.id/anime/genre/${slug}?page=1`);
             const response = await animes.json();
             setAnimes(response.data.animeList);
             setLoad(true);

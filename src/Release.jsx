@@ -16,7 +16,7 @@ const releases = () => {
     const fetchAnime = async () => {
         window.scrollTo(0, 0);
         try {
-            const releases = await fetch("https://www.sankavollerei.com/anime/schedule");
+            const releases = await fetch("https://www.sankavollerei.web.id/anime/schedule");
             const response = await releases.json();
             
             const schedule = {};
