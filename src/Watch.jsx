@@ -5,6 +5,8 @@ import { StepBack, StepForward } from 'lucide-react'
 
 const Watch = () => {
     const [fetchedData, setData] = useState(null);
+    const [getStreamLink, setStreamLink] = useState("");
+    const [getStreamQuality, setStreamQuality] = useState([]);
     const [isLoaded, setLoad] = useState(false);
     
     const { slug } = useParams();
@@ -21,10 +23,24 @@ const Watch = () => {
             const getStream = await fetch(`https://www.sankavollerei.web.id/anime/episode/${slug}`);
             const response = await getStream.json();
             setData(response.data);
+            setStreamLink(response.data.defaultStreamingUrl);
             
+            const qualities = response.data.server.qualities.splice(0, 1)
+            setStreamQuality(response.data.server.qualities)
             setLoad(true);
         } catch(e) {
             alert("Error!");
+        }
+    }
+    
+    const handleQuality = async (e) => {
+        const target = e.target.value
+        if (target === "360p") {
+            setStreamLink(fetchedData.defaultStreamingUrl)
+        } else {
+            const getStream = await fetch(`https://www.sankavollerei.web.id/anime/server/${target}`)
+            const response = await getStream.json()
+            setStreamLink(response.data.url)
         }
     }
     
@@ -54,7 +70,7 @@ const Watch = () => {
                     <div className="w-full aspect-video bg-gray-500 animate-pulse"></div>
                 ) : (
                     <div className="w-full aspect-video">
-                        <iframe src={fetchedData?.defaultStreamingUrl} width="100%" height="100%" allowFullScreen></iframe>
+                        <iframe src={getStreamLink} width="100%" height="100%" allowFullScreen></iframe>
                     </div>
                 )}
                 
@@ -86,6 +102,12 @@ const Watch = () => {
                     <div>
                         <h1 className="text-xl font-bold">{title || getTitle(fetchedData?.title)}</h1>
                         <p>Episode {getEpisodeNumber(slug)}</p>
+                        <select onChange={handleQuality} className="bg-transparent rounded-lg border border-white p-1 mt-2 outline-none">
+                            <option value="360p">360p</option>
+                            {getStreamQuality.map((item) => (
+                                <option value={item.serverList[0].serverId}>{item.title}</option>
+                            ))}
+                        </select>
                     </div>
                 </article>
             </main>

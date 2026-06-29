@@ -27,6 +27,13 @@ const Details = () => {
             
             const check = removeEmptyArray(response.data.synopsis.paragraphs);
             setSynopsis(check);
+            
+            const genres = response.data.genreList
+            genres.forEach((param) => {
+                if (param.title === "") {
+                    param.title = "Ecchi"
+                }
+            })
             setLoad(true);
         } catch(e) {
             alert(e);
@@ -133,11 +140,11 @@ const Details = () => {
                             , 4)}
                         </div>
                         
-                        <div className="flex flex-col gap-y-3 mt-5">
-                            <div className="h-5 w-24 bg-gray-500 animate-pulse rounded"></div>
-                            <div className="h-4 w-96 bg-gray-500 animate-pulse rounded"></div>
+                        <div className="flex flex-col gap-y-3 mt-4">
+                            <div className="h-5 w-20 bg-gray-500 animate-pulse rounded"></div>
+                            <div className="h-4 w-full bg-gray-500 animate-pulse rounded"></div>
                             
-                            <div className="flex flex-col gap-y-5 mt-5">
+                            <div className="flex flex-col gap-y-5 mt-2">
                                 <div className="h-5 w-32 bg-gray-500 animate-pulse rounded"></div>
                                 <div className="flex flex-col gap-3 h-96 overflow-y-scroll">
                                     {repeatment(<EpisodeSkeleton />, 6)}
@@ -149,14 +156,14 @@ const Details = () => {
                     <>
                         <div className="md:hidden">
                             <p>{details?.japanese}</p>
-                            <div className="flex flex-wrap mt-1 gap-y-2 gap-x-4 md:hidden">
+                            <div className="flex overflow-x-auto whitespace-nowrap mt-1 gap-x-4 md:hidden">
                                 <Tags>{details?.status}</Tags>
                                 <Tags>{details?.type}</Tags>
                                 <Tags>{details?.aired}</Tags>
                                 <Tags>{details?.studios}</Tags>
                             </div>
                             <hr className="mt-2 md:hidden" />
-                            <div className="flex flex-wrap mt-2 gap-y-2 gap-x-4 md:hidden">
+                            <div className="flex overflow-x-auto whitespace-nowrap mt-2 gap-x-4 md:hidden">
                                 {details?.genreList?.map((item) => (
                                     <Tags>
                                         <Link to={`/genre/${item.genreId}`} state={{ genre: item.title }}>
@@ -167,22 +174,20 @@ const Details = () => {
                             </div>
                         </div>
                             
-                        <div className="flex flex-col gap-y-5 mt-5 w-full items-center">
-                            <article className="flex flex-col md:w-3/4 md:cursor-pointer lg:w-2/3">
-                                {synopsis?.length > 0 && (
-                                    <>
-                                        <h2 className="text-xl font-bold">Sinopsis</h2>
-                                        <button onClick={() => setSynopsisOpen(!isSynopsisOpen)} className={`
-                                        overflow-hidden
-                                        ${isSynopsisOpen ? "h-full" : "max-h-32"}
-                                        `}>
-                                            {synopsis?.map((p) => (
-                                                <p className="leading-snug text-justify">{p}</p>
-                                            ))}
-                                        </button>
-                                    </>
-                                )}
-                            </article>
+                        <div className="flex flex-col gap-y-5 mt-4 w-full items-center">
+                            {synopsis?.length > 0 && (
+                                <article className="flex flex-col md:w-3/4 md:cursor-pointer lg:w-2/3">
+                                    <h2 className="text-xl font-bold">Sinopsis</h2>
+                                    <button onClick={() => setSynopsisOpen(!isSynopsisOpen)} className={`
+                                    overflow-hidden
+                                    ${isSynopsisOpen ? "h-full" : "max-h-32"}
+                                    `}>
+                                        {synopsis?.map((p) => (
+                                            <p className="leading-snug text-justify">{p}</p>
+                                        ))}
+                                    </button>
+                                </article>
+                            )}
                             
                             <section className="flex flex-col gap-y-2 w-full md:w-3/4 lg:w-2/3">
                                 <h2 className="text-xl font-bold">Daftar Episode</h2>

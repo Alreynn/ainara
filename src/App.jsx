@@ -45,7 +45,7 @@ const App = () => {
             setGenres(response.data.genreList);
             
             setError(false);
-            setLoad(true);
+            setTimeout(() => { setLoad(true) }, 200)
         } catch(e) {
             setError(true);
             console.clear();
